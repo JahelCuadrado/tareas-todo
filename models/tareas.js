@@ -23,6 +23,12 @@ class Tareas {
         this._listado[tarea.id] = tarea;
     }
 
+    borrarTarea(id=''){
+        if(this._listado[id]){
+            delete this._listado[id]
+        }
+    }
+
     cargarTareasFromArray(tareas =[]){
         tareas.forEach( tarea => {
             this._listado[tarea.id] = tarea;
@@ -47,6 +53,22 @@ class Tareas {
                 let estadoTarea = valor.completadoEn ? 'Completada'.green : 'Pendiente'.red;
                 console.log(indiceStr.green, valor.descripcion, ' :: ', estadoTarea);
         }); 
+    }
+
+    toggleCompletadas(ids = []){
+        ids.forEach(id => {
+            const tarea = this._listado[id]
+            if(!tarea.completadoEn){
+                tarea.completadoEn = new Date().toISOString();
+            }
+        });
+
+        this.listadoArray.forEach(tarea => {
+            if(!ids.includes(tarea.id)){
+                const tareaPendiente = this._listado[tarea.id];
+                tareaPendiente.completadoEn = null;
+            }
+        })
     }
 
 }

@@ -11,7 +11,6 @@ const archivo = './db/tareas.json'
 
  const leerDB = () => {
     if (!fs.existsSync(archivo)) {
-        console.log('MIERDA');
         return null;
         
     }
